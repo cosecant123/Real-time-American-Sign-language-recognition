@@ -1,0 +1,21 @@
+.Hangman{
+    display: flex;
+    justify-content: space-between;
+    background-color: #3C3F64;
+}
+.Hangman-image{
+    width: 300px;
+    height: 410px;
+    overflow: hidden;
+}
+.Hangman-word{
+    width: 300px;
+}
+/* .img{
+    width: 300px;
+    height: auto;
+} */
+.my-image{
+    width: 300px;
+    height: auto;
+}
