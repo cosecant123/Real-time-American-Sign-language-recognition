@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './Hangman.css';
 import Home from './Home'
+import MPHands from './components/MPHands'
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
   // eslint-disable-next-line no-use-before-define
   const [guessWord, setGuessWord] = useState('');
   const [wordBoard, setWordBoard] = useState([]);
   const [chancesLeft, setChancesLeft] = useState(8);
-  const [inputLetter, setInputLetter] = useState('');
+  // const [inputLetter, setInputLetter] = useState('');
   const [restart, setRestart] = useState(false);
+  const [outputLetter, setOutputLetter] = React.useState('');
 
   // Initialize the board
   const board = (guessWord) => {
@@ -37,19 +39,19 @@ export default () => {
   }, [guessWord])
 
  // Handle input letter and update word board and chances left accordingly
- function handleInputLetter() {
+ function handleOutputLetter() {
   if (isGameOver()) {
     return;
   }
    
-  if (inputLetter.length > 1 || inputLetter.length === 0) {
+  if (outputLetter.length > 1 || outputLetter.length === 0) {
     // setChancesLeft(chancesLeft - 1);
     // setInputLetter('');
     return;
   }
-  const lowercaseL = inputLetter.toLowerCase();
+  const lowercaseL = outputLetter.toLowerCase();
   if (wordBoard.includes(lowercaseL)) {
-    setInputLetter('');
+    setOutputLetter('');
     return;
   }
   let count = 0;
@@ -64,8 +66,9 @@ export default () => {
     setChancesLeft(chancesLeft - 1);
   }
   setWordBoard(newBoard);
-  setInputLetter('');
+   setOutputLetter('');
 }
+  
 
 // Check if game is over
 function isGameOver() {
@@ -90,6 +93,9 @@ function getWinOrNot() {
   return true;
 }
 
+function handleLetterOutput(letter) {
+  setOutputLetter(letter);
+}
   return (
     <div className="Hangman">
       <div className="Hangman-image">
@@ -107,8 +113,10 @@ function getWinOrNot() {
         <div>Hint: {guessWord}, just for testing</div>
         <div className="Hangman-chancesLeft">Chances left: {chancesLeft}</div>
         <div className="Hangman-input">
-          <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
-          <button onClick={handleInputLetter}>Submit</button>
+          <MPHands onLetterOutput={handleLetterOutput} />
+          {outputLetter ? handleOutputLetter(): null}
+            {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
+            <button onClick={handleInputLetter}>Submit</button> */}
         </div>
         {isGameOver() &&
           <div className="Hangman-gameOverMessage">

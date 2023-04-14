@@ -81,13 +81,14 @@ function getHighest(prediction) {
     }
   }
 }
-const MPHands = () => {
+const MPHands = (props) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  // const [isStart, setIsStart] = useState(false);
+  const [isStart, setIsStart] = useState(false);
+  const { onLetterOutput } = props;
 
   useEffect(() => {
-    console.log(Hands.VERSION);
+    console.log(Hands.VERSION, "abc");
     const hands = new Hands({
       locateFile: (file) => {
 
@@ -115,6 +116,7 @@ const MPHands = () => {
       camera.start();
     }
   }, []);
+
   let prediction = {}
   const onResults = (results) => {
     const videoWidth = webcamRef.current.video.videoWidth;
@@ -148,6 +150,7 @@ const MPHands = () => {
           // console.log(prediction[i])
           if (prediction[i] > 50) {
             console.log("QQQQQQQQQQQQQ", i)
+            onLetterOutput(i);
             //在前端显示字母
             prediction = {}
             break
