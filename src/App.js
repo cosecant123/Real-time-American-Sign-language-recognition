@@ -10,7 +10,8 @@ export default () => {
   const [chancesLeft, setChancesLeft] = useState(8);
   // const [inputLetter, setInputLetter] = useState('');
   const [restart, setRestart] = useState(false);
-  const [outputLetter, setOutputLetter] = React.useState('');
+  const [outputLetter, setOutputLetter] = useState('');
+  const [guessedLetter, setGuessedLetter] = useState('');
 
   // Initialize the board
   const board = (guessWord) => {
@@ -38,66 +39,68 @@ export default () => {
     }
   }, [guessWord])
 
- // Handle input letter and update word board and chances left accordingly
- function handleOutputLetter() {
-  if (isGameOver()) {
-    return;
-  }
-   
-  if (outputLetter.length > 1 || outputLetter.length === 0) {
-    // setChancesLeft(chancesLeft - 1);
-    // setInputLetter('');
-    return;
-  }
-  const lowercaseL = outputLetter.toLowerCase();
-  if (wordBoard.includes(lowercaseL)) {
-    setOutputLetter('');
-    return;
-  }
-  let count = 0;
-  const newBoard = [...wordBoard];
-  for (let i = 0; i < guessWord.length; i++) {
-    if (guessWord[i] === lowercaseL) {
-      newBoard[i] = lowercaseL;
-      count += 1;
+  // Handle input letter and update word board and chances left accordingly
+  function handleOutputLetter() {
+    if (isGameOver()) {
+      return;
     }
-  }
-  if (count === 0) {
-    setChancesLeft(chancesLeft - 1);
-  }
-  setWordBoard(newBoard);
-   setOutputLetter('');
-}
-  
 
-// Check if game is over
-function isGameOver() {
-  if (chancesLeft === 0) {
+    if (outputLetter.length > 1 || outputLetter.length === 0) {
+      // setChancesLeft(chancesLeft - 1);
+      // setInputLetter('');
+      return;
+    }
+    const lowercaseL = outputLetter.toLowerCase();
+    if (wordBoard.includes(lowercaseL)) {
+      setOutputLetter('');
+      
+      return;
+    }
+    let count = 0;
+    const newBoard = [...wordBoard];
+    for (let i = 0; i < guessWord.length; i++) {
+      if (guessWord[i] === lowercaseL) {
+        newBoard[i] = lowercaseL;
+        count += 1;
+      }
+    }
+    if (count === 0) {
+      setChancesLeft(chancesLeft - 1);
+    }
+    setWordBoard(newBoard);
+    setOutputLetter('');
+  }
+
+
+  // Check if game is over
+  function isGameOver() {
+    if (chancesLeft === 0) {
+      return true;
+    }
+    for (const letter of wordBoard) {
+      if (letter === '_') {
+        return false;
+      }
+    }
     return true;
   }
-  for (const letter of wordBoard) {
-    if (letter === '_') {
-      return false;
-    }
-  }
-  return true;
-}
 
-// Check if player wins
-function getWinOrNot() {
-  for (const letter of wordBoard) {
-    if (letter === '_') {
-      return false;
+  // Check if player wins
+  function getWinOrNot() {
+    for (const letter of wordBoard) {
+      if (letter === '_') {
+        return false;
+      }
     }
+    return true;
   }
-  return true;
-}
 
-function handleLetterOutput(letter) {
-  setOutputLetter(letter);
-}
-const [isStart, setIsStart] = useState(false);
-const startCamera = () => {
+  function handleLetterOutput(letter) {
+    setOutputLetter(letter);
+    setGuessedLetter(letter)
+  }
+  const [isStart, setIsStart] = useState(false);
+  const startCamera = () => {
     // console.log("enle!")
     setIsStart(true)
   };
@@ -109,7 +112,7 @@ const startCamera = () => {
       <div className="Hangman-word">
         <div>
           {/* <Home /> */}
-         
+
         </div>
         <div className="Hangman-wordBoard">
           {wordBoard.map((letter, index) => (
@@ -119,22 +122,25 @@ const startCamera = () => {
         <div>Hint: {guessWord}, just for testing</div>
         <div className="Hangman-chancesLeft">Chances left: {chancesLeft}</div>
         <button onClick={startCamera}>Start camera</button>
+        <div>You guessed: {guessedLetter}</div>
         <div className="Hangman-input">
-        {isStart? 
-      (<MPHands onLetterOutput={handleLetterOutput} />):
-      <div></div>
-      }
+          {isStart ?
+            (<MPHands onLetterOutput={handleLetterOutput} />) :
+            <div></div>
+          }
           {/* <MPHands onLetterOutput={handleLetterOutput} /> */}
-          {outputLetter ? handleOutputLetter(): null}
-            {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
+          {outputLetter ? handleOutputLetter() : null}
+          {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
             <button onClick={handleInputLetter}>Submit</button> */}
         </div>
+
+        {console.log(outputLetter)}
         {isGameOver() &&
           <div className="Hangman-gameOverMessage">
             {getWinOrNot() ? "Congratulations! You won!" : "Game over! The word is: " + guessWord}
             <button onClick={e => { setRestart(!restart); setChancesLeft(8); }}>Play again!</button>
           </div>
-          }
+        }
       </div>
     </div>
   );
