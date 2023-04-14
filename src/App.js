@@ -96,6 +96,11 @@ function getWinOrNot() {
 function handleLetterOutput(letter) {
   setOutputLetter(letter);
 }
+const [isStart, setIsStart] = useState(false);
+const startCamera = () => {
+    // console.log("enle!")
+    setIsStart(true)
+  };
   return (
     <div className="Hangman">
       <div className="Hangman-image">
@@ -103,7 +108,8 @@ function handleLetterOutput(letter) {
       </div>
       <div className="Hangman-word">
         <div>
-          <Home />
+          {/* <Home /> */}
+         
         </div>
         <div className="Hangman-wordBoard">
           {wordBoard.map((letter, index) => (
@@ -112,8 +118,13 @@ function handleLetterOutput(letter) {
         </div>
         <div>Hint: {guessWord}, just for testing</div>
         <div className="Hangman-chancesLeft">Chances left: {chancesLeft}</div>
+        <button onClick={startCamera}>Start camera</button>
         <div className="Hangman-input">
-          <MPHands onLetterOutput={handleLetterOutput} />
+        {isStart? 
+      (<MPHands onLetterOutput={handleLetterOutput} />):
+      <div></div>
+      }
+          {/* <MPHands onLetterOutput={handleLetterOutput} /> */}
           {outputLetter ? handleOutputLetter(): null}
             {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
             <button onClick={handleInputLetter}>Submit</button> */}

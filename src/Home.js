@@ -5,7 +5,7 @@ import MPHands from "./components/MPHands";
 function Home() {
     const [isStart, setIsStart] = useState(false);
     const startCamera = () => {
-        console.log("enle!")
+        // console.log("enle!")
         setIsStart(true)
       };
   return (
