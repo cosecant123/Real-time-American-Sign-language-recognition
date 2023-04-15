@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Hangman.css';
-import Home from './Home'
 import MPHands from './components/MPHands'
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
   // eslint-disable-next-line no-use-before-define
@@ -101,46 +101,49 @@ export default () => {
   }
   const [isStart, setIsStart] = useState(false);
   const startCamera = () => {
-    // console.log("enle!")
     setIsStart(true)
   };
+
   return (
     <div className="Hangman">
-      <div className="Hangman-image">
-        {isGameOver() && getWinOrNot() ? <img src="/9.jpeg" class="my-image" alt="hangman" /> : <img src={`/${chancesLeft}.jpeg`} class="my-image" alt="hangman" />}
+      <div className="box">
+        <div className="Hangman-image">
+          {isGameOver() && getWinOrNot() ? <img src="/9.jpeg" class="my-image" alt="hangman" /> : <img src={`/${chancesLeft}.jpeg`} class="my-image" alt="hangman" />}
+          <button onClick={startCamera}>Start camera</button>
+        </div>
       </div>
-      <div className="Hangman-word">
-        <div>
-          {/* <Home /> */}
-
-        </div>
-        <div className="Hangman-wordBoard">
-          {wordBoard.map((letter, index) => (
-            <span key={index} className="Hangman-letter">{letter} </span>
-          ))}
-        </div>
-        <div>Hint: {guessWord}, just for testing</div>
-        <div className="Hangman-chancesLeft">Chances left: {chancesLeft}</div>
-        <button onClick={startCamera}>Start camera</button>
-        <div>You guessed: {guessedLetter}</div>
-        <div className="Hangman-input">
+      <div className="box">
           {isStart ?
             (<MPHands onLetterOutput={handleLetterOutput} />) :
             <div></div>
           }
-          {/* <MPHands onLetterOutput={handleLetterOutput} /> */}
           {outputLetter ? handleOutputLetter() : null}
           {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
             <button onClick={handleInputLetter}>Submit</button> */}
+      </div>
+      <div className="box">
+        <div className="Hangman-wordBoard">
+          <p>WORDBOARD</p>
+          {wordBoard.map((letter, index) => (
+            <span key={index} className="Hangman-letter">{letter} </span>
+          ))}
         </div>
-
-        {console.log(outputLetter)}
+        <div>(Hint: {guessWord}, just for testing)</div>
+        <div className="Hangman-chancesLeft">Chances left: {chancesLeft}</div>
+        {/* <button onClick={startCamera}>Start camera</button> */}
+        <div className="guess">You guessed: {guessedLetter}</div>
+        
         {isGameOver() &&
           <div className="Hangman-gameOverMessage">
             {getWinOrNot() ? "Congratulations! You won!" : "Game over! The word is: " + guessWord}
-            <button onClick={e => { setRestart(!restart); setChancesLeft(8); }}>Play again!</button>
+            <div className="newGame">
+              <button onClick={e => { setRestart(!restart); setChancesLeft(8); }}>Play again!</button>
+            </div>
           </div>
         }
+      </div>
+      <div className="box">
+        <img src="asl.jpeg" class="my-image" alt="tutorial" />
       </div>
     </div>
   );

@@ -1,14 +1,13 @@
 .Hangman{
     display: flex;
     justify-content: space-between;
-    background-color: #3C3F64;
 }
 .Hangman-image{
     width: 300px;
     height: 410px;
     overflow: hidden;
 }
-.Hangman-word{
+.Hangman-wordBoard{
     width: 300px;
 }
 /* .img{
@@ -19,3 +18,34 @@
     width: 300px;
     height: auto;
 }
+
+.box {
+    flex: 1;
+    height: 100px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.box:last-child {
+    margin-right: 0;
+}
+  
+.Hangman-gameOverMessage {
+    margin-top: 10px;
+    display: inline-block; 
+}
+
+.Hangman-chancesLeft {
+    margin-top: 10px;
+    margin-left: -40px;
+    background-color: red;
+}
+
+.guess {
+    margin-top: 10px;
+    margin-left: -40px;
+}
+.newGame {
+    margin-top: 10px;
+}
+  

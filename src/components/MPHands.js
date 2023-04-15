@@ -185,11 +185,11 @@ const MPHands = (props) => {
           ref={webcamRef}
           style={{
             position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: "0",
+            marginLeft: "0px",
+            marginRight: "0px",
+            left: "300px",
             right: "0",
-            textAlign: "center",
+            textAlign: "left",
             zindex: 9,
             width: 320,
             height: 240,
@@ -199,11 +199,11 @@ const MPHands = (props) => {
           ref={canvasRef}
           style={{
             position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: "0",
+            marginLeft: "0px",
+            marginRight: "0px",
+            left: "300px",
             right: "0",
-            textAlign: "center",
+            textAlign: "left",
             zindex: 9,
             width: 320,
             height: 240,
