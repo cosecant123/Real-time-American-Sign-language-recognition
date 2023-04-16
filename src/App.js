@@ -46,8 +46,6 @@ export default () => {
     }
 
     if (outputLetter.length > 1 || outputLetter.length === 0) {
-      // setChancesLeft(chancesLeft - 1);
-      // setInputLetter('');
       return;
     }
     const lowercaseL = outputLetter.toLowerCase();
@@ -133,7 +131,7 @@ export default () => {
           <div className="Hangman-gameOverMessage">
             {getWinOrNot() ? "Congratulations! You won!" : "Game over! The word is: " + guessWord}
             <div className="newGame">
-              <button onClick={e => { setRestart(!restart); setChancesLeft(8); }}>Play again!</button>
+              <button onClick={e => { setRestart(!restart); setChancesLeft(8); }}>Play Again!</button>
             </div>
           </div>  
         }
@@ -146,9 +144,6 @@ export default () => {
         {outputLetter ? handleOutputLetter() : null}
         {/* <div class="button"> */}
           <button onClick={startCamera}>Start camera</button>
-        {/* </div> */}
-          {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
-            <button onClick={handleInputLetter}>Submit</button> */}
       </div>
       <div className="box">
         <img src="asl.jpeg" class="my-image" alt="tutorial" />

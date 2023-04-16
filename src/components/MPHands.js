@@ -74,10 +74,8 @@ const MPHands = (props) => {
   const { onLetterOutput } = props;
 
   useEffect(() => {
-    console.log(Hands.VERSION, "abc");
     const hands = new Hands({
       locateFile: (file) => {
-
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.3.1626903359/${file}`;
       },
     });
