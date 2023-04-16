@@ -104,31 +104,27 @@ export default () => {
     setIsStart(true)
   };
 
+  console.log("guessWord:", guessWord);
+
   return (
     <div className="Hangman">
       <div className="box">
         <div className="Hangman-image">
           {isGameOver() && getWinOrNot() ? <img src="/9.jpeg" class="my-image" alt="hangman" /> : <img src={`/${chancesLeft}.jpeg`} class="my-image" alt="hangman" />}
-          <button onClick={startCamera}>Start camera</button>
+          {/* <button onClick={startCamera}>Start camera</button> */}
         </div>
       </div>
-      <div className="box">
-          {isStart ?
-            (<MPHands onLetterOutput={handleLetterOutput} />) :
-            <div></div>
-          }
-          {outputLetter ? handleOutputLetter() : null}
-          {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
-            <button onClick={handleInputLetter}>Submit</button> */}
-      </div>
+      
       <div className="box">
         <div className="Hangman-wordBoard">
           <p>WORDBOARD</p>
+          <div className="letter">
           {wordBoard.map((letter, index) => (
             <span key={index} className="Hangman-letter">{letter} </span>
           ))}
+          </div>
         </div>
-        <div>(Hint: {guessWord}, just for testing)</div>
+        {/* <div>(Hint: {guessWord}, just for testing)</div> */}
         <div className="Hangman-chancesLeft">Chances left: {chancesLeft}</div>
         {/* <button onClick={startCamera}>Start camera</button> */}
         <div className="guess">You guessed: {guessedLetter}</div>
@@ -139,8 +135,20 @@ export default () => {
             <div className="newGame">
               <button onClick={e => { setRestart(!restart); setChancesLeft(8); }}>Play again!</button>
             </div>
-          </div>
+          </div>  
         }
+      </div>
+      <div className="box">
+          {isStart ?
+            (<MPHands onLetterOutput={handleLetterOutput} />) :
+            <div></div>
+          }
+        {outputLetter ? handleOutputLetter() : null}
+        {/* <div class="button"> */}
+          <button onClick={startCamera}>Start camera</button>
+        {/* </div> */}
+          {/* <input type="text" maxLength="1" value={inputLetter} onChange={(event) => setInputLetter(event.target.value)} />
+            <button onClick={handleInputLetter}>Submit</button> */}
       </div>
       <div className="box">
         <img src="asl.jpeg" class="my-image" alt="tutorial" />

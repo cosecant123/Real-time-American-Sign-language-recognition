@@ -10,10 +10,7 @@
 .Hangman-wordBoard{
     width: 300px;
 }
-/* .img{
-    width: 300px;
-    height: auto;
-} */
+
 .my-image{
     width: 300px;
     height: auto;
@@ -36,9 +33,17 @@
 }
 
 .Hangman-chancesLeft {
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-left: -40px;
-    background-color: red;
+    /* background-color: red; */
+    font-size: 24px; /* Adjust to your desired size */
+    font-weight: bold;
+    font-family: Arial, sans-serif; /* Adjust to your desired font */
+    text-align: center; /* Centers the text */
+    color: #ff4500; /* Adjust to your desired color */
+    background-color: #f5f5f5; /* Adjust to your desired background color */
+    padding: 16px; 
+    border-radius: 8px; /* Adds rounded corners to the div */
 }
 
 .guess {
@@ -49,3 +54,38 @@
     margin-top: 10px;
 }
   
+p {
+    font-size: 36px; /* Adjust to your desired size */
+    font-weight: bold;
+    font-family: Arial, sans-serif; /* Adjust to your desired font */
+    text-transform: uppercase; /* Displays text in uppercase */
+    color: #0072c6; /* Adjust to your desired color */
+    letter-spacing: 5px; /* Adds space between the letters */
+    text-shadow: 1px 1px #000000; /* Adds a shadow effect */
+    text-align: center;
+  }
+
+.letter {
+    font-weight: bold;
+    font-family: Arial, sans-serif; 
+    text-align: center;
+    background-color: #f5f5f5; /* Adjust to your desired background color */
+    padding: 16px; 
+    border-radius: 8px; 
+}
+
+.guess{
+    font-weight: bold;
+    font-family: Arial, sans-serif; 
+}
+
+.box:nth-of-type(3) {
+    position: relative; /* Set the second div to be a relative positioning context */
+}
+  
+.box:nth-of-type(3) button {
+position: absolute; /* Set the button to be positioned absolutely */
+bottom: -200px; /* Position the button at the bottom of the div */
+left: 60%; /* Position the button in the center horizontally */
+transform: translateX(-50%); /* Move the button left by 50% of its own width */
+}

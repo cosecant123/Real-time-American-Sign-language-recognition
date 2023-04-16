@@ -7,9 +7,6 @@ import {
 } from "@mediapipe/drawing_utils/drawing_utils";
 import { Camera } from "@mediapipe/camera_utils/camera_utils";
 import score from "./Output2"
-import pickledData from "./model.p"
-
-
 
 let word_dict = {
   0: 'A',
@@ -40,14 +37,10 @@ let word_dict = {
   25: 'J'
 }
 function getPredict(landmarks) {
-  // console.log("landmarks: ", landmarks)
-  // const nodePickle = require('node-pickle');
-  // nodePickle.load(pickledData)
   var data_input = []
   var data_input_x = []
   var data_input_y = []
   for (var i in landmarks) {
-    // console.log()
     var x = landmarks[i].x
     var y = landmarks[i].y
     data_input_x.push(x)
@@ -59,20 +52,13 @@ function getPredict(landmarks) {
   for (var j in landmarks) {
     var x = landmarks[j].x
     var y = landmarks[j].y
-    // console.log(x)
-    // console.log(Math.min(data_input_x))
     data_input.push(x - Math.min(...data_input_x));
     data_input.push(y - Math.min(...data_input_y));
   }
-  // console.log(data_input)
   let pred = score(data_input);
   let z = Math.max(...pred)
-  // console.log()
   let l = pred.indexOf(z)
-  // console.log(word_dict[l])
   return word_dict[l]
-  // console.log(pred)
-  // console.log("Prediction results:",Math.round(pred));
 }
 function getHighest(prediction) {
   for (let i in prediction) {
@@ -147,11 +133,8 @@ const MPHands = (props) => {
           prediction[result] = 1
         }
         for (let i in prediction) {
-          // console.log(prediction[i])
           if (prediction[i] > 50) {
-            console.log("QQQQQQQQQQQQQ", i)
             onLetterOutput(i);
-            //在前端显示字母
             prediction = {}
             break
           }
@@ -170,14 +153,11 @@ const MPHands = (props) => {
 
 
   const startCamera = () => {
-    console.log("enle!")
     setIsStart(true)
   };
 
   return (
     <div>
-      {/* {console.log(isStart)} */}
-     
       <div>
         <Webcam
           audio={false}
@@ -187,7 +167,7 @@ const MPHands = (props) => {
             position: "absolute",
             marginLeft: "0px",
             marginRight: "0px",
-            left: "300px",
+            left: "25px",
             right: "0",
             textAlign: "left",
             zindex: 9,
@@ -201,7 +181,7 @@ const MPHands = (props) => {
             position: "absolute",
             marginLeft: "0px",
             marginRight: "0px",
-            left: "300px",
+            left: "25px",
             right: "0",
             textAlign: "left",
             zindex: 9,
