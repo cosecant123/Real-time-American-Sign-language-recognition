@@ -13,6 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 We use our hand to train the model, and due to none of us know the ASL well, so the training data contians inaccuracy gestures.<br>
 
 
-
+### The model is training by
+https://github.com/NUAnita/mediapipe_hangman
 
 
