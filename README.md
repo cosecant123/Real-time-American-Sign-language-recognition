@@ -9,6 +9,9 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+### About the training data
+We use our hand to train the model, and due to none of us know the ASL well, so the training data contians inaccuracy gestures.<br>
+
 
 
 
